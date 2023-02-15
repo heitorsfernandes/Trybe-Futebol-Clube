@@ -12,10 +12,10 @@ export default class MatchesController {
     return res.status(200).json(result);
   }
 
-/*   static async getTeamById(req: Request, res: Response) {
-    const { id } = req.params;
-    const result = await TeamsServices.getTeamById(Number(id));
+  static async postMatch(req: Request, res: Response) {
+    const data = req.body;
+    const result = await MatchesServices.postMatch(data);
 
-    return res.status(200).json(result);
-  } */
+    return res.status(201).json(result);
+  }
 }

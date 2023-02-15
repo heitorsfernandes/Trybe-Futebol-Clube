@@ -33,4 +33,9 @@ export default class TeamsServices {
 
     return data;
   }
+
+  static async postMatch(newInfo:object) {
+    const data = await Matches.create({ ...newInfo, inProgress: true });
+    return data;
+  }
 }
