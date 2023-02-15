@@ -38,4 +38,8 @@ export default class TeamsServices {
     const data = await Matches.create({ ...newInfo, inProgress: true });
     return data;
   }
+
+  static async updateMatchStatus(id: number) {
+    Matches.update({ inProgress: false }, { where: { id } });
+  }
 }

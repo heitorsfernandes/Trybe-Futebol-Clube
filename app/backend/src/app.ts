@@ -19,6 +19,7 @@ class App {
     this.app.get('/teams', TeamsController.getAllTeams);
     this.app.get('/teams/:id', TeamsController.getTeamById);
     this.app.post('/matches', MatchesController.postMatch);
+    this.app.patch('/matches/:id/finish', MatchesController.updateMatchStatus);
   }
 
   private config():void {
