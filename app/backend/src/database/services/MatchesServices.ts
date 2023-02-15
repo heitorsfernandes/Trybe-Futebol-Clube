@@ -55,7 +55,7 @@ export default class TeamsServices {
         message: { message: 'It is not possible to create a match with two equal teams' } };
     }
     const data = await Matches.create({ ...newInfo, inProgress: true });
-    return { status: 200, message: data };
+    return { status: 201, message: data };
   }
 
   static async updateMatchStatus(id: number) {

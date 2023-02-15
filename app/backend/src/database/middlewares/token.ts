@@ -12,7 +12,12 @@ export default class Token {
   }
 
   static verifyToken(token: string) {
-    const tokenVerify = jwt.verify(token, jwtSecret as string);
-    return tokenVerify;
+    try {
+      console.log(jwtSecret, 'to aqui');
+      const tokenVerify = jwt.verify(token, jwtSecret as string);
+      return tokenVerify;
+    } catch (error) {
+      return null;
+    }
   }
 }
