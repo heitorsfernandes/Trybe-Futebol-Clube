@@ -1,5 +1,8 @@
+import * as jwt from 'jsonwebtoken';
 import Matches from '../models/Matches';
 import Teams from '../models/Teams';
+import INewMatch from '../interfaces/INewMatch';
+import Token from '../middlewares/token';
 
 export default class TeamsServices {
   static async getMatches() {
@@ -34,9 +37,25 @@ export default class TeamsServices {
     return data;
   }
 
-  static async postMatch(newInfo:object) {
+  static async postMatch(newInfo:INewMatch, authorization: string) {
+    const verify = Token.verifyToken(authorization) as jwt.JwtPayload;
+    if (!verify) {
+      return { status: 401, message: { message: 'Token must be a valid token' } };
+    }
+    const homeTeam = await Teams.findByPk(newInfo.homeTeamId);
+    const awayTeam = await Teams.findByPk(newInfo.awayTeamId);
+    if (!homeTeam || !awayTeam) {
+      return {
+        status: 404,
+        message: { message: 'There is no team with such id!' } };
+    }
+    if (newInfo.homeTeamId === newInfo.awayTeamId) {
+      return {
+        status: 422,
+        message: { message: 'It is not possible to create a match with two equal teams' } };
+    }
     const data = await Matches.create({ ...newInfo, inProgress: true });
-    return data;
+    return { status: 200, message: data };
   }
 
   static async updateMatchStatus(id: number) {

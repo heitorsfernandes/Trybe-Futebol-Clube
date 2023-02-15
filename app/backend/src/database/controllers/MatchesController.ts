@@ -14,9 +14,11 @@ export default class MatchesController {
 
   static async postMatch(req: Request, res: Response) {
     const data = req.body;
-    const result = await MatchesServices.postMatch(data);
+    const { authorization } = req.headers;
+    const { status, message } = await
+    MatchesServices.postMatch(data, authorization as string);
 
-    return res.status(201).json(result);
+    return res.status(status).json(message);
   }
 
   static async updateMatchStatus(req: Request, res: Response) {
