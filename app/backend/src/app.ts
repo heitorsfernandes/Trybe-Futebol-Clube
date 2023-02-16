@@ -20,6 +20,7 @@ class App {
     this.app.get('/teams/:id', TeamsController.getTeamById);
     this.app.post('/matches', MatchesController.postMatch);
     this.app.patch('/matches/:id/finish', MatchesController.updateMatchStatus);
+    this.app.patch('/matches/:id', MatchesController.updateMatchScore);
   }
 
   private config():void {

@@ -27,4 +27,12 @@ export default class MatchesController {
 
     return res.status(200).json({ message: 'Finished' });
   }
+
+  static async updateMatchScore(req:Request, res:Response) {
+    const { id } = req.params;
+    const newScore = req.body;
+    await MatchesServices.updateMatchScore(+id, newScore);
+
+    return res.status(200).json({ message: 'Match in Progress' });
+  }
 }
