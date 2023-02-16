@@ -2,6 +2,7 @@ import * as express from 'express';
 import UserController from './database/controllers/UserController';
 import TeamsController from './database/controllers/TeamsController';
 import MatchesController from './database/controllers/MatchesController';
+import LeaderboardController from './database/controllers/LeaderboardController';
 
 class App {
   public app: express.Express;
@@ -21,6 +22,8 @@ class App {
     this.app.post('/matches', MatchesController.postMatch);
     this.app.patch('/matches/:id/finish', MatchesController.updateMatchStatus);
     this.app.patch('/matches/:id', MatchesController.updateMatchScore);
+    this.app.get('/leaderboard/home', LeaderboardController.getLeaderboardHome);
+    this.app.get('/leaderboard/away', LeaderboardController.getLeaderboardAway);
   }
 
   private config():void {
