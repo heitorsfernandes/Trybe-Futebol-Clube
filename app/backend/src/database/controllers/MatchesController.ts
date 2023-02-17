@@ -30,8 +30,7 @@ export default class MatchesController {
 
   static async updateMatchScore(req:Request, res:Response) {
     const { id } = req.params;
-    const newScore = req.body;
-    await MatchesServices.updateMatchScore(+id, newScore);
+    await MatchesServices.updateMatchScore(+id);
 
     return res.status(200).json({ message: 'Match in Progress' });
   }

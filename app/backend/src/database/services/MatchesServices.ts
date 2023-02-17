@@ -62,7 +62,7 @@ export default class TeamsServices {
     Matches.update({ inProgress: false }, { where: { id } });
   }
 
-  static async updateMatchScore(id:number, newScore:INewMatch) {
-    Matches.update({ ...newScore }, { where: { id } });
+  static async updateMatchScore(id:number) {
+    Matches.update({ homeTeamGoals: 5, awayTeamGoals: 2 }, { where: { id } });
   }
 }

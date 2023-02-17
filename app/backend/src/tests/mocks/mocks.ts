@@ -15,17 +15,17 @@ const matchesMock =
     }
   },
   {
-    "id": 2,
-    "homeTeamId": 9,
-    "homeTeamGoals": 1,
-    "awayTeamId": 14,
-    "awayTeamGoals": 1,
-    "inProgress": false,
+    "id": 41,
+    "homeTeamId": 16,
+    "homeTeamGoals": 2,
+    "awayTeamId": 9,
+    "awayTeamGoals": 0,
+    "inProgress": true,
     "homeTeam": {
-      "teamName": "Internacional"
+      "teamName": "São Paulo"
     },
     "awayTeam": {
-      "teamName": "Santos"
+      "teamName": "Internacional"
     }
   }
 ]
