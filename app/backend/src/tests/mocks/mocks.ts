@@ -1,32 +1,25 @@
-const matchesMock =
+const mockPostMatchResult =
 [
   {
-    "id": 1,
-    "homeTeamId": 16,
-    "homeTeamGoals": 1,
-    "awayTeamId": 8,
-    "awayTeamGoals": 1,
-    "inProgress": false,
-    "homeTeam": {
-      "teamName": "São Paulo"
-    },
-    "awayTeam": {
-      "teamName": "Grêmio"
-    }
-  },
-  {
-    "id": 41,
-    "homeTeamId": 16,
+    "id": 49,
+    "homeTeamId": 8,
+    "awayTeamId": 12,
     "homeTeamGoals": 2,
-    "awayTeamId": 9,
-    "awayTeamGoals": 0,
-    "inProgress": true,
-    "homeTeam": {
-      "teamName": "São Paulo"
-    },
-    "awayTeam": {
-      "teamName": "Internacional"
-    }
+    "awayTeamGoals": 2,
+    "inProgress": true
   }
 ]
-export default matchesMock
+const mockSendPostBody = {
+  "homeTeamId": 8,
+  "awayTeamId": 12,
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 2
+}
+
+const mockSendPostBodyEqual = {
+  "homeTeamId": 12,
+  "awayTeamId": 12,
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 2
+}
+export { mockPostMatchResult, mockSendPostBody, mockSendPostBodyEqual }

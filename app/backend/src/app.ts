@@ -24,6 +24,7 @@ class App {
     this.app.patch('/matches/:id', MatchesController.updateMatchScore);
     this.app.get('/leaderboard/home', LeaderboardController.getLeaderboardHome);
     this.app.get('/leaderboard/away', LeaderboardController.getLeaderboardAway);
+    this.app.get('/leaderboard', LeaderboardController.getLeaderboardAll);
   }
 
   private config():void {

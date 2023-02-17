@@ -32,6 +32,19 @@ export default class LeaderboardServices {
     efficiency: '',
   };
 
+  static allLb: ILeaderboard = {
+    name: '',
+    totalPoints: 0,
+    totalGames: 0,
+    totalVictories: 0,
+    totalDraws: 0,
+    totalLosses: 0,
+    goalsFavor: 0,
+    goalsOwn: 0,
+    goalsBalance: 0,
+    efficiency: '',
+  };
+
   static sortLeaderboard(teamLeaderboard: ILeaderboard[]) {
     const result = teamLeaderboard.sort((a, b) => {
       if (b.totalPoints !== a.totalPoints) {
@@ -104,5 +117,33 @@ export default class LeaderboardServices {
     const awayLeaderBoard = await this.boardAway(allTeams, allMatches);
     const finalSorted = this.sortLeaderboard(awayLeaderBoard);
     return finalSorted;
+  }
+
+  static efficiencyMath(home:ILeaderboard, away:ILeaderboard | undefined) {
+    const totalP = home.totalPoints + Number(away?.totalPoints);
+    const totalG = (home.totalGames + Number(away?.totalGames));
+    const efficiency = (totalP / (totalG * 3)) * 100;
+    return efficiency.toFixed(2);
+  }
+
+  static async getLeaderboardAll() {
+    const lbHome = await this.getLeaderboardHome();
+    const lbAway = await this.getLeaderboardAway();
+    const lbAll = lbHome.map((home) => {
+      const away = lbAway.find((e) => e.name === home.name);
+      const board = { ...this.allLb };
+      board.name = home.name;
+      board.totalPoints = home.totalPoints + Number(away?.totalPoints);
+      board.totalGames = home.totalGames + Number(away?.totalGames);
+      board.totalVictories = home.totalVictories + Number(away?.totalVictories);
+      board.totalDraws = home.totalDraws + Number(away?.totalDraws);
+      board.totalLosses = home.totalLosses + Number(away?.totalLosses);
+      board.goalsFavor = home.goalsFavor + Number(away?.goalsFavor);
+      board.goalsOwn = home.goalsOwn + Number(away?.goalsOwn);
+      board.goalsBalance = home.goalsBalance + Number(away?.goalsBalance);
+      board.efficiency = this.efficiencyMath(home, away);
+      return board;
+    });
+    return this.sortLeaderboard(lbAll);
   }
 }
